@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +17,8 @@ import com.builderlandingpage.myapplication.data.viewModel.PlanViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.dialog.MaterialDialogs
 
 class MainActivity : AppCompatActivity(),PlanAdapter.DataClick {
 
@@ -75,5 +78,27 @@ class MainActivity : AppCompatActivity(),PlanAdapter.DataClick {
     override fun ItemClick(pacakge: MembershipPacakge.Package?) {
         Toast.makeText(this, "You Click " + pacakge?.packageName, Toast.LENGTH_SHORT).show()
     }
+
+    override fun onBackPressed() {
+        displayExitDialog()
+    }
+    fun displayExitDialog(){
+
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Kotlin Retrofit MVVM Demo")
+        builder.setMessage("Are you sure want to exit from this app")
+
+        builder.setPositiveButton(android.R.string.yes) { dialog, which ->
+                 finish()
+        }
+
+        builder.setNegativeButton(android.R.string.no) { dialog, which ->
+            dialog.dismiss()
+        }
+
+        builder.show()
+
+    }
+
 
 }
