@@ -49,16 +49,15 @@ class MainActivity : AppCompatActivity(),PlanAdapter.DataClick {
         planRequest.society_id="1"
         planRequest.language_id="1"
 
-        planViewModel.getPlanData(planRequest)!!.observe(this,{
-            response ->
+        planViewModel.getPlanData(planRequest)!!.observe(this) { response ->
             val msg = response.message
-            if(response.status.equals("200")){
-                Toast.makeText(this, ""+msg, Toast.LENGTH_SHORT).show()
-                planAdapter= PlanAdapter(response.packageX,this)
-                recycler.adapter=planAdapter
+            if (response.status.equals("200")) {
+                Toast.makeText(this, "" + msg, Toast.LENGTH_SHORT).show()
+                planAdapter = PlanAdapter(response.packageX, this)
+                recycler.adapter = planAdapter
             }
 
-        })
+        }
     }
 
     fun displayImageProfile(ctx: Context?, img: ImageView?, url: String?) {
